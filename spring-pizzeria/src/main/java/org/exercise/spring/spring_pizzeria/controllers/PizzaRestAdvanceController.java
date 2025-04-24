@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/pizze")
@@ -48,6 +49,15 @@ public class PizzaRestAdvanceController {
     }
 
     // UPDATE
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Pizza> update(@Valid @RequestBody Pizza pizza, @PathVariable("id") Integer id) {
+        Optional<Pizza> pizzaOptional = pizzaService.findById(id);
+        if (pizzaOptional.isEmpty()) {
+            return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
+        }
+        pizza.setId(id);
+        return new ResponseEntity<Pizza>(pizzaService.save(pizza), HttpStatus.OK);
+    }
 
     // DELETE
 
