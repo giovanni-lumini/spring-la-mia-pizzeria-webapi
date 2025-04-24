@@ -1,11 +1,15 @@
 package org.exercise.spring.spring_pizzeria.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.exercise.spring.spring_pizzeria.model.Pizza;
 import org.exercise.spring.spring_pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +27,14 @@ public class PizzaRestAdvanceController {
     }
 
     // SHOW
+    @GetMapping("/{id}")
+    public ResponseEntity<Pizza> show(@PathVariable("id") Integer id) {
+        Optional<Pizza> pizzaOptional = pizzaService.findById(id);
+        if (pizzaOptional.isEmpty()) {
+            return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Pizza>(pizzaOptional.get(), HttpStatus.OK);
+    }
 
     // CREATE
 

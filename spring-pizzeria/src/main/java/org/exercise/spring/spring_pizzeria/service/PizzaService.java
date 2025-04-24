@@ -18,6 +18,11 @@ public class PizzaService {
         return pizzaRepository.findAll();
     }
 
+    // findById
+    public Optional<Pizza> findById(Integer id) {
+        return pizzaRepository.findById(id);
+    }
+
     // getById
     public Pizza getById(Integer id) {
         Optional<Pizza> pizzaOptional = pizzaRepository.findById(id);
