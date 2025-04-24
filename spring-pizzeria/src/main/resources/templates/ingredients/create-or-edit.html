@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create-or-edit-Ingredients</title>
+    <!-- importo il frammento styles -->
+    <th:block th:replace="~{fragments/fragments :: styles}"/> 
+</head>
+<body>
+    <!-- importo il frammento header -->
+    <th:block th:replace="~{fragments/fragments :: header}"/>
+
+    <main class="container mt-3">
+        <h2 class="mt-2 mb-4 text-center">
+            Inserisci un nuovo ingrediente
+        </h2>
+        
+        <!-- FORM per CREARE una nuovo ingrediente -->
+        <form 
+            id="ingredient-form"
+            th:action="${edit} ? @{'/ingredients/edit/' + ${ingredient.id}} : @{/ingredients/create}"
+            th:object="${ingredient}"
+            method="post">
+                <!-- inserisco gli input per ogni campo di Ingrediet -->
+                <!-- input con gestione errori per ognuno -->
+                <!-- nome -->
+                <div class="mb-3">
+                    <label class="form-label" for="nome">Nome ingrediente:</label>
+                    <input class="form-control" placeholder="Inserisci qui il nome" id="nome" type="text" th:field="*{nome}" th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- foto -->
+                <div class="mb-3">
+                    <label class="form-label" for="foto">Foto:</label>
+                    <textarea class="form-control" placeholder="Inserisci qui l'url della foto" id="foto" th:field="*{foto}" th:errorClass="is-invalid"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('foto')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('foto')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- descrizione -->
+                <div class="mb-3">
+                    <label class="form-label" for="descrizione">Descrizione:</label>
+                    <textarea class="form-control" placeholder="Inserisci qui la descrizione" id="descrizione" th:field="*{descrizione}" th:errorClass="is-invalid"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('descrizione')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('descrizione')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- submit -->
+                <div class="mb-5 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Inserisci ingrediente</button>
+                    <button type="submit" class="btn btn-warning" onclick="document.getElementById('ingredient-form').reset();">Svuota campi</button>
+                </div>
+        </form>
+
+        <!-- importo il frammento button -->
+    <div th:insert="~{fragments/fragments :: button('/pizze', 'Vai alla pagina pizze menù')}"></div>
+    </main>
+
+    
+</body>
+</html>

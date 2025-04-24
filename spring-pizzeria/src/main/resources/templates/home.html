@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- importo il frammento styles -->
+    <th:block th:replace="~{fragments/fragments :: styles}"/>   
+</head>
+<body>
+    <!-- importo il frammento header -->
+    <th:block th:replace="~{fragments/fragments :: header}"/>
+
+    <div class="container m-auto text-center mt-5">
+        <!-- importo il frammento title -->
+        <th:block th:replace="~{fragments/fragments :: title(pageTitle='Benvenuto nella mia pizzeria!')}"/>
+
+        <!-- importo il frammento button -->
+        <div th:insert="~{fragments/fragments :: button('/pizze', 'Vai alla Pizze Page')}" class="mt-5"></div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create-Pizze</title>
+    <!-- importo il frammento styles -->
+    <th:block th:replace="~{fragments/fragments :: styles}"/> 
+</head>
+<body>
+    <!-- importo il frammento header -->
+    <th:block th:replace="~{fragments/fragments :: header}"/>
+
+    <main class="container mt-3">
+        <h2 class="mt-2 mb-4 text-center">
+            Inserisci una nuova offerta speciale alla pizza "[[${specialOffer.pizza.nome}]]"
+        </h2>
+        
+        <!-- FORM per CREARE una nuova offerta speciale -->
+        <form 
+            id="offertaSpeciale-form"
+            th:action="${edit} ? @{'/specialoffer/edit/' + ${specialOffer.id}} : @{/specialoffer/create}"
+            th:object="${specialOffer}"
+            method="post">
+
+                <!-- informazione relativa alla pizza -->
+                <input type="hidden" th:field="*{pizza}" id="linked-pizza">
+
+                <!-- inserisco gli input per ogni campo di SpecialOffer -->
+                <!-- input con gestione errori per ognuno -->
+                <!-- titolo -->
+                <div class="mb-3">
+                    <label class="form-label" for="titolo">Titolo offerta:</label>
+                    <input class="form-control" placeholder="Inserisci qui il titolo" id="titolo" type="text" th:field="*{titolo}" th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('titolo')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('titolo')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- inizioOfferta -->
+                <div class="mb-3">
+                    <label class="form-label" for="inizioOfferta">Data inizio offerta:</label>
+                    <input class="form-control" id="inizioOfferta" type="date" th:field="*{inizioOfferta}" th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('inizioOfferta')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('inizioOfferta')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- fineOfferta -->
+                <div class="mb-3">
+                    <label class="form-label" for="fineOfferta">Data fine offerta:</label>
+                    <input class="form-control" id="fineOfferta" type="date" th:field="*{fineOfferta}" th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('fineOfferta')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('fineOfferta')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- submit -->
+                <div class="mb-5 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Inserisci offerta</button>
+                    <button type="submit" class="btn btn-warning" onclick="document.getElementById('offertaSpeciale-form').reset();">Svuota campi</button>
+                </div>
+        </form>
+
+        <!-- importo il frammento button -->
+    <div th:insert="~{fragments/fragments :: button('/pizze', 'Vai alla pagina pizze menù')}"></div>
+    </main>
+
+    
+</body>
+</html>
