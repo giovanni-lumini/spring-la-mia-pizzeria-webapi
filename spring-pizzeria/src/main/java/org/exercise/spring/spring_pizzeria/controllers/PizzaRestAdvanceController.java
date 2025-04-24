@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 @RestController
 @RequestMapping("/api/pizze")
 public class PizzaRestAdvanceController {
@@ -37,6 +42,10 @@ public class PizzaRestAdvanceController {
     }
 
     // CREATE
+    @PostMapping("/store")
+    public ResponseEntity<Pizza> store(@Valid @RequestBody Pizza pizza) {
+        return new ResponseEntity<Pizza>(pizzaService.save(pizza), HttpStatus.OK);
+    }
 
     // UPDATE
 
