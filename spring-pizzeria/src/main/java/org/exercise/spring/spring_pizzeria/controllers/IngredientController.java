@@ -1,8 +1,6 @@
 package org.exercise.spring.spring_pizzeria.controllers;
 
 import org.exercise.spring.spring_pizzeria.model.Ingredient;
-import org.exercise.spring.spring_pizzeria.model.Pizza;
-import org.exercise.spring.spring_pizzeria.repository.IngredientRepository;
 import org.exercise.spring.spring_pizzeria.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

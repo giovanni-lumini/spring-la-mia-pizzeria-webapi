@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.exercise.spring.spring_pizzeria.model.Ingredient;
 import org.exercise.spring.spring_pizzeria.model.Pizza;
 import org.exercise.spring.spring_pizzeria.repository.IngredientRepository;
-import org.exercise.spring.spring_pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,6 @@ import org.springframework.stereotype.Service;
 public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
-
-    @Autowired
-    private PizzaRepository pizzaRepository;
 
     // findAll
     public List<Ingredient> findAll() {
