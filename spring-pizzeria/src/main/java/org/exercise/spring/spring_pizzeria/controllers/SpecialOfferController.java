@@ -1,7 +1,7 @@
 package org.exercise.spring.spring_pizzeria.controllers;
 
 import org.exercise.spring.spring_pizzeria.model.SpecialOffer;
-import org.exercise.spring.spring_pizzeria.repository.SpecialOfferRepository;
+import org.exercise.spring.spring_pizzeria.service.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 public class SpecialOfferController {
 
     @Autowired
-    private SpecialOfferRepository specialOfferRepository;
+    private SpecialOfferService specialOfferService;
 
     // CREATE
     @PostMapping("/create")
@@ -27,8 +27,7 @@ public class SpecialOfferController {
         if (bindingResult.hasErrors()) {
             return "specialOffer/create-or-edit";
         }
-        specialOfferRepository.save(formSpecialOffer);
-
+        specialOfferService.save(formSpecialOffer);
         return "redirect:/pizze/" + formSpecialOffer.getPizza().getId();
     }
 
@@ -36,8 +35,7 @@ public class SpecialOfferController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
 
-        model.addAttribute("specialOffer", specialOfferRepository.findById(id).get());
-
+        model.addAttribute("specialOffer", specialOfferService.getById(id));
         model.addAttribute("edit", true);
 
         /*
@@ -46,7 +44,6 @@ public class SpecialOfferController {
          * System.out.println(specialOfferRepository.findById(id).get().getFineOfferta()
          * );
          */
-
         return "specialOffer/create-or-edit";
     }
 
@@ -58,10 +55,7 @@ public class SpecialOfferController {
             // se c'è qualche errore, torna al form
             return "specialOffer/create-or-edit";
         }
-
-        specialOfferRepository.save(formSpecialOffer);
-
+        specialOfferService.save(formSpecialOffer);
         return "redirect:/pizze/" + formSpecialOffer.getPizza().getId();
     }
-
 }
