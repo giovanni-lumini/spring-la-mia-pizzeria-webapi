@@ -18,11 +18,14 @@
         <!-- FORM per CREARE una nuova pizza -->
         <form 
             id="pizza-form"
-            th:action="@{/pizze/edit/{id}(id=${pizza.id})}"
+            th:action="@{'/pizze/edit/' + ${pizza.id}}"
             th:object="${pizza}"
             method="post">
-                <!-- inserisco gli input per ogni campo di Pizze -->
 
+                <!-- campo nascosto per id -->
+                <input type="hidden" th:field="*{id}" />
+
+                <!-- inserisco gli input per ogni campo di Pizze -->
                 <!-- input con gestione errori per ognuno -->
                 <!-- nome -->
                 <div class="mb-3">
@@ -37,7 +40,7 @@
                 <!-- descrizione -->
                 <div class="mb-3">
                     <label class="form-label" for="descrizione">Descrizione:</label>
-                    <textarea class="form-control" placeholder="Inserisci la descrizione della foto" id="descrizione" th:field="*{descrizione}" th:errorClass="is-invalid"></textarea>
+                    <textarea class="form-control" placeholder="Inserisci qui la descrizione" id="descrizione" th:field="*{descrizione}" th:errorClass="is-invalid"></textarea>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('descrizione')}">
                         <ul>
                             <li th:each="error : ${#fields.errors('descrizione')}" th:text="${error}"></li>

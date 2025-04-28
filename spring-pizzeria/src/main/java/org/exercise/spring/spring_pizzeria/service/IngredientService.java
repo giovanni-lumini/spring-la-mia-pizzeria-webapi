@@ -42,6 +42,5 @@ public class IngredientService {
             linkedPizza.getIngredients().remove(ingredientToDelete);
         }
         ingredientRepository.delete(ingredientToDelete);
-
     }
 }

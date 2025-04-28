@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.exercise.spring.spring_pizzeria.model.Pizza;
 import org.exercise.spring.spring_pizzeria.model.SpecialOffer;
+import org.exercise.spring.spring_pizzeria.service.IngredientService;
 import org.exercise.spring.spring_pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class PizzaController {
 
     @Autowired
     PizzaService pizzaService;
+
+    @Autowired
+    IngredientService ingredientService;
 
     // INDEX
     @GetMapping
@@ -55,14 +59,14 @@ public class PizzaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
-        model.addAttribute("ingredients", pizzaService.findAll());
+        model.addAttribute("ingredients", ingredientService.findAll());
         return "pizze/create";
     }
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizze, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("ingredients", pizzaService.findAll());
+            model.addAttribute("ingredients", ingredientService.findAll());
             return "pizze/create";
         }
         pizzaService.save(formPizze);
@@ -73,14 +77,14 @@ public class PizzaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("pizza", pizzaService.getById(id));
-        model.addAttribute("ingredients", pizzaService.findAll());
+        model.addAttribute("ingredients", ingredientService.findAll());
         return "pizze/edit";
     }
 
     @PostMapping("/edit/{id}")
     public String edit(@Valid @ModelAttribute("pizza") Pizza formPizze, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("ingredients", pizzaService.findAll());
+            model.addAttribute("ingredients", ingredientService.findAll());
             return "pizze/edit";
         }
         pizzaService.save(formPizze);
@@ -92,7 +96,6 @@ public class PizzaController {
     public String delete(@PathVariable("id") Integer id) {
         pizzaService.deleteById(id);
         return "redirect:/pizze";
-
     }
 
     // ONE TO MANY

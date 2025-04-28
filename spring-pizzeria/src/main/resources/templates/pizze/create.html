@@ -21,8 +21,11 @@
             th:action="@{/pizze/create}"
             th:object="${pizza}"
             method="post">
-                <!-- inserisco gli input per ogni campo di Pizze -->
 
+                <!-- campo nascosto per id -->
+                <input type="hidden" th:field="*{id}" />
+
+                <!-- inserisco gli input per ogni campo di Pizze -->
                 <!-- input con gestione errori per ognuno -->
                 <!-- nome -->
                 <div class="mb-3">

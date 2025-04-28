@@ -50,10 +50,18 @@
                     <h5 class="card-title mb-3">[[*{titolo}]]</h5>
                     <p class="card-text">Inizio offerta: [[*{inizioOfferta}]]</p>
                     <p class="card-text">Fine offerta: [[*{fineOfferta}]]</p>
-                    <!-- pagina per modificare l'offerta -->
-                    <td>
-                        <a th:href="@{'/specialoffer/edit/' + *{id}}" class="btn btn-warning btn-sm">Modifica offerta</a>
-                    </td>
+                    <div class="d-flex justify-content-around">
+                        <!-- pagina per modificare l'offerta -->
+                        <td>
+                            <a th:href="@{'/specialoffer/edit/' + *{id}}" class="btn btn-warning btn-sm">Modifica offerta</a>
+                        </td>
+                        <!-- eliminare l'offerta -->
+                        <div>
+                            <form th:action="@{'/specialoffer/delete/' + *{id}}" method="post">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

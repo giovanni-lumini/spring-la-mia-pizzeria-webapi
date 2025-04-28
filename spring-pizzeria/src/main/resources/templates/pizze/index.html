@@ -45,7 +45,7 @@
                         <div>
                             <a th:href="@{'/pizze/edit/' + *{id}}" class="btn btn-success">Edit</a>
                         </div>
-                        <!-- pagina per eliminare la pizza -->
+                        <!-- eliminare la pizza -->
                         <div>
                             <form th:action="@{'/pizze/delete/' + *{id}}" method="post">
                                 <button type="submit" class="btn btn-danger">Delete</button>

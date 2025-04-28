@@ -20,4 +20,10 @@ public class SpecialOfferService {
         return specialOfferRepository.findById(id).get();
     }
 
+    // deleteById
+    public void deleteById(Integer id) {
+        SpecialOffer specialOfferToDelete = getById(id);
+        specialOfferRepository.delete(specialOfferToDelete);
+    }
+
 }
