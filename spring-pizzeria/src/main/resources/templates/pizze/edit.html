@@ -15,7 +15,7 @@
         <!-- importo il frammento title -->
         <th:block th:replace="~{fragments/fragments :: title(pageTitle='Crea una nuova pizza')}"/>
         
-        <!-- FORM per CREARE una nuova pizza -->
+        <!-- FORM per MODIFICARE una pizza -->
         <form 
             id="pizza-form"
             th:action="@{'/pizze/edit/' + ${pizza.id}}"

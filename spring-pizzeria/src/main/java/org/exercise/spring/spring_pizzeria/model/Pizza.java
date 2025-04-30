@@ -2,6 +2,8 @@ package org.exercise.spring.spring_pizzeria.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,11 +41,13 @@ public class Pizza {
 
     // one to many
     @OneToMany(mappedBy = "pizza", cascade = { CascadeType.REMOVE })
+    @JsonManagedReference
     private List<SpecialOffer> offerteSpeciali;
 
     // many to many
     @ManyToMany
     @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    @JsonManagedReference
     private List<Ingredient> ingredients;
 
     // getter e setter

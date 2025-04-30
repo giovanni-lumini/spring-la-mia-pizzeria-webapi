@@ -2,6 +2,8 @@ package org.exercise.spring.spring_pizzeria.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +35,7 @@ public class Ingredient {
 
     // relazione many to many
     @ManyToMany(mappedBy = "ingredients")
+    @JsonBackReference
     private List<Pizza> pizze;
 
     // getter e setter
@@ -86,8 +89,6 @@ public class Ingredient {
                 ", nome='" + getNome() + "'" +
                 ", foto='" + getFoto() + "'" +
                 ", descrizione='" + getDescrizione() + "'" +
-                ", pizze='" + getPizze() + "'" +
                 "}";
     }
-
 }
