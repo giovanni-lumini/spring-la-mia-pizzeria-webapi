@@ -69,9 +69,11 @@
         </form>
 
         <!-- importo il frammento button -->
-    <div th:insert="~{fragments/fragments :: button('/pizze', 'Vai alla pagina pizze menù')}"></div>
+        <div th:insert="~{fragments/fragments :: button('/pizze', 'Vai alla pagina pizze menù')}"></div>
     </main>
 
+    <!-- importo il frammento footer -->
+    <th:block th:replace="fragments/fragments :: footer"></th:block>
     
 </body>
 </html>

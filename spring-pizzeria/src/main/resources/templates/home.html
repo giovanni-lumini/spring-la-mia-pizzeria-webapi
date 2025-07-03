@@ -11,7 +11,7 @@
     <!-- importo il frammento header -->
     <th:block th:replace="~{fragments/fragments :: header}"/>
 
-    <main class="flex-fill container my-5 m-auto text-center">
+    <main class="flex-fill container my-5 m-auto text-center my-5">
         <!-- importo il frammento title -->
         <th:block th:replace="~{fragments/fragments :: title(pageTitle='Benvenuto nella mia pizzeria!')}"/>
 
@@ -20,7 +20,7 @@
     </main>
 
     <!-- importo il frammento footer -->
-    <th:block th:replace="fragments/fragments :: footer('&copy; 2025')"></th:block>
+    <th:block th:replace="fragments/fragments :: footer"></th:block>
 
 </body>
 </html>
