@@ -22,6 +22,9 @@ public class SpecialOfferController {
     private SpecialOfferService specialOfferService;
 
     // CREATE
+
+    // la chiamata get è nel controller della pizza
+
     @PostMapping("/create")
     public String store(@ModelAttribute("specialOffer") SpecialOffer formSpecialOffer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

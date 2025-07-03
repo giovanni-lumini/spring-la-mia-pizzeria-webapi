@@ -13,7 +13,7 @@
 
     <main class="flex-fill container my-5">
         <!-- importo il frammento title -->
-        <th:block th:replace="~{fragments/fragments :: title(pageTitle='Crea una nuova pizza')}"/>
+        <th:block th:replace="~{fragments/fragments :: title(pageTitle='Modifica la pizza: ' + ${pizza.nome})}"/>
         
         <!-- FORM per MODIFICARE una pizza -->
         <form 
