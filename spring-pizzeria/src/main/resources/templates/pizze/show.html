@@ -7,71 +7,72 @@
     <!-- importo il frammento styles -->
     <th:block th:replace="~{fragments/fragments :: styles}"/>   
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- importo il frammento header -->
     <th:block th:replace="~{fragments/fragments :: header}"/>
 
-    <div class="text-center m-4">
-        <!-- importo il frammento title -->
-        <th:block th:replace="~{fragments/fragments :: title(pageTitle='Dettaglio pizza')}"/>
-    </div>
-
-    <div class="container m-auto">
-        <div class="row d-flex justify-content-center">
-            <div class="col-3 card m-2 p-0 d-flex" th:object="${pizza}">
-                <img th:src="*{foto}" class="card-img-top w-100" style="height: 200px; object-fit: cover;" alt="...">
-                <div class="card-body d-flex flex-column justify-content-between m-0 text-center">
-                    <p class="card-text">Pizza Id: [[*{id}]]</p>
-                    <h5 class="card-title">[[*{nome}]]</h5>
-                    <p class="card-text mb-5" style="height: 50px;">[[*{descrizione}]]</p>
-                    <p class="card-text">€ [[*{prezzo}]]</p>
+    <main class="flex-fill container my-5">
+        <div class="text-center">
+            <!-- importo il frammento title -->
+            <th:block th:replace="~{fragments/fragments :: title(pageTitle='Dettaglio pizza')}"/>
+        </div>
+    
+        <div class="container m-auto">
+            <div class="row d-flex justify-content-center">
+                <div class="col-3 card m-2 p-0 d-flex" th:object="${pizza}">
+                    <img th:src="*{foto}" class="card-img-top w-100" style="height: 200px; object-fit: cover;" alt="...">
+                    <div class="card-body d-flex flex-column justify-content-between m-0 text-center">
+                        <p class="card-text">Pizza Id: [[*{id}]]</p>
+                        <h5 class="card-title">[[*{nome}]]</h5>
+                        <p class="card-text mb-5" style="height: 50px;">[[*{descrizione}]]</p>
+                        <p class="card-text">€ [[*{prezzo}]]</p>
+                    </div>
+    
+                    <a th:href="@{'/pizze/' + *{id} + '/specialoffer/create'}" class="btn btn-success btn-sm">Inserisci offerta</a>
                 </div>
-
-                <a th:href="@{'/pizze/' + *{id} + '/specialoffer/create'}" class="btn btn-success btn-sm">Inserisci offerta</a>
             </div>
         </div>
-    </div>
-
-    <!-- ingredienti -->
-    <div class="container m-auto text-center mt-3">
-        <h3>Ingredienti:</h3>
-        <div class="" th:each="ingredients : ${pizza.ingredients}" th:object="${ingredients}">
-            <strong><div th:text="*{nome}"></li></strong>
-            <div th:text="*{descrizione}"></li>
+    
+        <!-- ingredienti -->
+        <div class="container m-auto text-center mt-3">
+            <h3>Ingredienti:</h3>
+            <div class="" th:each="ingredients : ${pizza.ingredients}" th:object="${ingredients}">
+                <strong><div th:text="*{nome}"></li></strong>
+                <div th:text="*{descrizione}"></li>
+            </div>
         </div>
-    </div>
-
-    <!-- Offerta speciale -->
-    <div class="container m-auto mt-3">
-        <div class="row d-flex justify-content-center">
-            <div class="col-3 card m-2 p-0 d-flex" th:each="specialOffer : ${pizza.offerteSpeciali}" th:object="${specialOffer}">
-                <div class="card-body d-flex flex-column justify-content-between m-0 text-center bg-dark text-white">
-                    <h2 class="">OFFERTA!!!</h2>
-                    <h5 class="card-title mb-3">[[*{titolo}]]</h5>
-                    <p class="card-text">Inizio offerta: [[*{inizioOfferta}]]</p>
-                    <p class="card-text">Fine offerta: [[*{fineOfferta}]]</p>
-                    <div class="d-flex justify-content-around">
-                        <!-- pagina per modificare l'offerta -->
-                        <td>
-                            <a th:href="@{'/specialoffer/edit/' + *{id}}" class="btn btn-warning btn-sm">Modifica offerta</a>
-                        </td>
-                        <!-- eliminare l'offerta -->
-                        <div>
-                            <form th:action="@{'/specialoffer/delete/' + *{id}}" method="post">
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+    
+        <!-- Offerta speciale -->
+        <div class="container m-auto mt-3">
+            <div class="row d-flex justify-content-center">
+                <div class="col-3 card m-2 p-0 d-flex" th:each="specialOffer : ${pizza.offerteSpeciali}" th:object="${specialOffer}">
+                    <div class="card-body d-flex flex-column justify-content-between m-0 text-center bg-dark text-white">
+                        <h2 class="">OFFERTA!!!</h2>
+                        <h5 class="card-title mb-3">[[*{titolo}]]</h5>
+                        <p class="card-text">Inizio offerta: [[*{inizioOfferta}]]</p>
+                        <p class="card-text">Fine offerta: [[*{fineOfferta}]]</p>
+                        <div class="d-flex justify-content-around">
+                            <!-- pagina per modificare l'offerta -->
+                            <td>
+                                <a th:href="@{'/specialoffer/edit/' + *{id}}" class="btn btn-warning btn-sm">Modifica offerta</a>
+                            </td>
+                            <!-- eliminare l'offerta -->
+                            <div>
+                                <form th:action="@{'/specialoffer/delete/' + *{id}}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-    </div>
-
-    <div class="text-center m-4">
-        <!-- importo il frammento button -->
-        <div th:insert="~{fragments/fragments :: button('/pizze', 'Torna a Pizze menù ')}"></div>
-    </div>
+    
+        <div class="text-center m-4">
+            <!-- importo il frammento button -->
+            <div th:insert="~{fragments/fragments :: button('/pizze', 'Torna a Pizze menù ')}"></div>
+        </div>
+    </main>
 
     <!-- importo il frammento footer -->
     <th:block th:replace="fragments/fragments :: footer('&copy; 2025')"></th:block>
